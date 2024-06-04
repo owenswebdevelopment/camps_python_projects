@@ -18,7 +18,7 @@ from Text import Text
 
 # Sounds
 pop = Sound("sounds/pop.wav")
-coin = Sound("sounds/coin.wav")
+money = Sound("sounds/coin.wav")
 clown_honk = Sound("sounds/clown_honk.wav")
 
 # Screen
@@ -78,6 +78,7 @@ while running:
 
 		if dino.detect_collision(coin.rect):
 			score_text.update(score_text.score + 5)
+			money.play_sound()
 			coin.reset_position()
 	else:
 		message.draw(screen)
