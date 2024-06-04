@@ -12,6 +12,7 @@ class Dino:
         self.resized_image_1 = pygame.transform.scale(self.image_1, (self.width, self.height))
         self.resized_image_2 = pygame.transform.scale(self.image_2, (self.width, self.height))
         self.jumping = False
+        self.rect = pygame.Rect(x, y, width, height)
 
     def draw(self, screen):
         if self.jumping:
@@ -28,6 +29,11 @@ class Dino:
             self.jumping = False
             self.speed = 0
 
+        self.rect = pygame.Rect(self.x, self.y, (self.width - 20), (self.height - 15))
+
     def jump(self):
         self.jumping = True
-        self.speed = -18
+        self.speed = -12
+
+    def detect_collision(self, other_rect):
+        return self.rect.colliderect(other_rect)
