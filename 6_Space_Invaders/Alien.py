@@ -17,7 +17,7 @@ class Alien:
 
     def draw(self, screen):
         screen.blit(self.resized_image, (self.x, self.y))
-        pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)
+        # pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)
     
     def assign_x(self):
         if self.direction == 'right':

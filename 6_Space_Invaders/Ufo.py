@@ -14,7 +14,7 @@ class Ufo:
   def draw(self, screen):
     screen.blit(self.resized_image, (self.x, self.y))
 
-    pygame.draw.rect(screen, (0, 0, 255), self.rect, 2)
+    # pygame.draw.rect(screen, (0, 0, 255), self.rect, 2)
 
   def move(self, direction, screen_width):
     if direction == 'left':

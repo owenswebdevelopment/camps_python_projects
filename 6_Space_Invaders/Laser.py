@@ -14,7 +14,7 @@ class Laser:
   def draw(self, screen):
     screen.blit(self.resized_image, (self.x, self.y))
 
-    pygame.draw.rect(screen, (0, 0, 255), self.rect, 2)
+    # pygame.draw.rect(screen, (0, 0, 255), self.rect, 2)
 
   def move(self):
     self.y = self.y - self.speed
