@@ -1,5 +1,5 @@
 import pygame, random
-from Laser import Laser
+from AlienLaser import AlienLaser
 
 class Alien:
     def __init__(self, screen_width):
@@ -10,17 +10,14 @@ class Alien:
         self.screen_width = screen_width
         self.x = self.assign_x()
         self.y = 0 - self.height
-        self.lasers = []
         self.image = pygame.image.load('assets/alien.png')
         self.resized_image = pygame.transform.scale(self.image, (self.width, self.height))
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.next_shoot_time = pygame.time.get_ticks() + random.randint(1000, 3000)
 
     def draw(self, screen):
         screen.blit(self.resized_image, (self.x, self.y))
         pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)
-    
-    # def create_laser(self):
-    #     self.lasers.append(Laser(self))
     
     def assign_x(self):
         if self.direction == 'right':
@@ -40,7 +37,6 @@ class Alien:
             self.x += self.speed
         elif self.direction == 'left':
             self.x -= self.speed
-
         self.check_boundaries()
 
     def check_boundaries(self):
@@ -53,3 +49,10 @@ class Alien:
 
     def detect_collision(self, other_rect):
         return self.rect.colliderect(other_rect)
+
+    def shoot(self, current_time):
+        if current_time >= self.next_shoot_time:
+            laser = AlienLaser(self.x, self.y, self.width, self.height)
+            self.next_shoot_time = current_time + random.randint(1000, 3000)
+            return laser
+        return None

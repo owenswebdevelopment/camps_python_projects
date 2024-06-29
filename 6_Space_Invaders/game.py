@@ -11,6 +11,7 @@ os.chdir(script_dir)
 from Background import Background
 from Ufo import Ufo
 from Laser import Laser
+from AlienLaser import AlienLaser
 from Sound import Sound
 from Alien import Alien
 
@@ -45,7 +46,8 @@ next_alien_time = 0
 def create_alien():
 	aliens.append(Alien(screen_width))
 
-
+# Aliens Lasers
+alien_lasers = []
 
 # Game loop
 running = True
@@ -69,28 +71,45 @@ while running:
 		next_ufo_laser_time = current_time + 300
 
 	if not game_over:
-		# Draw
+		# Draw Background
 		background.draw(screen)
+
+		# Draw Ufo
 		ufo.draw(screen)
 		for ufo_laser in ufo_lasers:
 			ufo_laser.draw(screen)
+
+		# Draw alien
 		for alien in aliens:
 			alien.draw(screen)
+		for alien_laser in alien_lasers:
+			alien_laser.draw(screen)
 
-		# Update
+		# Update ufo
 		for ufo_laser in ufo_lasers:
 			ufo_laser.move()
 
+		# Update Aliens
 		if current_time >= next_alien_time:
 			aliens.append(Alien(screen_width))
 			next_alien_time = current_time + random.randint(1000, 2500)
 
 		for alien in aliens:
 			alien.create()
+			laser = alien.shoot(current_time)
+			if laser:
+				alien_lasers.append(laser)
+
 			for ufo_laser in list(ufo_lasers):
 				if alien.detect_collision(ufo_laser):
 					aliens.remove(alien)
 					ufo_lasers.remove(ufo_laser)
+
+		# Update alien lasers
+		for alien_laser in list(alien_lasers):
+			alien_laser.move()
+			if alien_laser.y > screen_height:
+				alien_lasers.remove(alien_laser)
 
 	pygame.display.flip()
 	clock.tick(120)
