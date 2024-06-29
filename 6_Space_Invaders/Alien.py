@@ -47,6 +47,9 @@ class Alien:
         if self.x > self.screen_width:
             self.y += self.height
             self.direction = 'left'
+        elif self.x < -self.width:
+            self.y += self.height
+            self.direction = 'right'
 
     def detect_collision(self, other_rect):
         return self.rect.colliderect(other_rect)

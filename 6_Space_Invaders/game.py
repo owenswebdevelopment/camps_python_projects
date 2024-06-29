@@ -35,17 +35,17 @@ pew = Sound('sounds/pew.wav')
 # Ufo
 ufo = Ufo(screen_width, screen_height)
 
+# Ufo Lasers
+ufo_lasers = []
+next_ufo_laser_time = 0
+	
 # Aliens
 aliens = []
 next_alien_time = 0
 def create_alien():
 	aliens.append(Alien(screen_width))
 
-# Ufo Lasers
-ufo_lasers = []
-next_ufo_laser_time = 0
-def create_ufo_laser(): 
-	ufo_lasers.append(Laser(ufo))
+
 
 # Game loop
 running = True
@@ -65,7 +65,7 @@ while running:
 		ufo.move('right', screen_width)
 	if keys[pygame.K_SPACE] and current_time >= next_ufo_laser_time:
 		pew.play_sound()
-		create_ufo_laser()
+		ufo_lasers.append(Laser(ufo))
 		next_ufo_laser_time = current_time + 300
 
 	if not game_over:
@@ -82,7 +82,7 @@ while running:
 			ufo_laser.move()
 
 		if current_time >= next_alien_time:
-			create_alien()
+			aliens.append(Alien(screen_width))
 			next_alien_time = current_time + random.randint(1000, 2500)
 
 		for alien in aliens:
