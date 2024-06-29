@@ -52,7 +52,7 @@ class Alien:
 
     def shoot(self, current_time):
         if current_time >= self.next_shoot_time:
-            laser = AlienLaser(self.x, self.y, self.width, self.height)
+            laser = AlienLaser(self)
             self.next_shoot_time = current_time + random.randint(1000, 3000)
             return laser
         return None

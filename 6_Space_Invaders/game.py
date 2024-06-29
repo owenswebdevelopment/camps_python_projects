@@ -32,6 +32,7 @@ background = Background('assets/background.png', 0, 0, screen_width, screen_heig
 
 # Sounds
 pew = Sound('sounds/pew.wav')
+pop = Sound('sounds/pop.wav')
 
 # Ufo
 ufo = Ufo(screen_width, screen_height)
@@ -98,10 +99,12 @@ while running:
 			alien.create()
 			laser = alien.shoot(current_time)
 			if laser:
+				pew.play_sound()
 				alien_lasers.append(laser)
 
 			for ufo_laser in list(ufo_lasers):
 				if alien.detect_collision(ufo_laser):
+					pop.play_sound()
 					aliens.remove(alien)
 					ufo_lasers.remove(ufo_laser)
 

@@ -1,11 +1,11 @@
 import pygame
 
 class AlienLaser:
-    def __init__(self, x, y, width, height):
+    def __init__(self, alien):
         self.width = 40 // 3
         self.height = 82 // 3
-        self.x = x + width // 2 - self.width // 2
-        self.y = height
+        self.x = alien.x + alien.width // 2 - self.width // 2
+        self.y = alien.height
         self.speed = 2
         self.image = pygame.image.load('assets/pink_laser.png')
         self.resized_image = pygame.transform.scale(self.image, (self.width, self.height))
