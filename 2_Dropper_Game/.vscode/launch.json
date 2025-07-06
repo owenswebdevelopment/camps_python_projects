@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Game",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/2_Dropper_Game/game.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PATH": "${workspaceFolder}/.venv/bin:${env:PATH}"
+            }
+        }
+    ]
+}
