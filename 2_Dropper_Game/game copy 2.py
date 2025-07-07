@@ -29,7 +29,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 # General variables
 clock = pygame.time.Clock()
 start_time = pygame.time.get_ticks()
-score_text = Text(1000, (255, 150, 203), (300, 25))
+score_text = Text(50, (0, 0, 0), (25, 25))
 lives_section = Lives(screen_width)
 message = Message('assets/gameover.png', 30, (screen_height / 2) - 100, 100, 100)
 game_over = False
@@ -47,26 +47,15 @@ hare = Hare(hare_x, hare_y)
 
 # Carrots
 carrots = [
-  Carrot(0, screen_width, screen_height),
-  Carrot(0, screen_width, screen_height),
-  Carrot(0, screen_width, screen_height),
-  Carrot(0, screen_width, screen_height)
+  Carrot(0, screen_width, screen_height), 
+  Carrot(1000, screen_width, screen_height), 
+  Carrot(2000, screen_width, screen_height)
 ]
 
 # Snowballs
 snowballs = [
-  Snowball(0, screen_width, screen_height),
-  Snowball(500, screen_width, screen_height),
-  Snowball(1000, screen_width, screen_height),
-  Snowball(1500, screen_width, screen_height),
-  Snowball(2000, screen_width, screen_height),
-  Snowball(2500, screen_width, screen_height),
-  Snowball(0, screen_width, screen_height),
-  Snowball(500, screen_width, screen_height),
-  Snowball(1000, screen_width, screen_height),
-  Snowball(1500, screen_width, screen_height),
-  Snowball(2000, screen_width, screen_height),
-  Snowball(2500, screen_width, screen_height)
+  Snowball(0, screen_width, screen_height), 
+  Snowball(1000, screen_width, screen_height), 
 ]
 
 # Game loop
@@ -88,7 +77,7 @@ while running:
     hare.moving = False
 
   if not game_over:
-
+            
     # Draw
     background.draw(screen)
     hare.draw(screen)
@@ -96,7 +85,7 @@ while running:
 
     for carrot in carrots:
       carrot.draw(screen)
-
+    
     for snowball in snowballs:
       snowball.draw(screen)
 
@@ -110,7 +99,7 @@ while running:
       if carrot.spawned:
         carrot.move()
         carrot.update(score_text)
-
+        
     for snowball in snowballs:
       if not snowball.spawned and current_time >= snowball.spawn_time:
         snowball.spawned = True

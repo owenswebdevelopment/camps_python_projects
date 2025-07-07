@@ -1,16 +1,16 @@
 import pygame
 import random
 
-class Carrot:
+class Snowball:
     def __init__(self, spawn_time, screen_width, screen_height):
-        self.width = 281
-        self.height = 421
+        self.width = 269
+        self.height = 298
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.x = random.randint(0, screen_width - 50)
         self.y = - self.height
-        self.speed = random.randint(3, 6)
-        self.image = pygame.image.load('assets/carrot.png')
+        self.speed = random.randint(6, 9)
+        self.image = pygame.image.load('assets/snowball.png')
         self.resized_image = pygame.transform.scale(self.image, (self.width // 5, self.height // 5))
         self.rect = pygame.Rect(self.x, self.y, self.width // 5, self.height // 5)
         self.spawn_time = spawn_time
@@ -23,16 +23,17 @@ class Carrot:
     def move(self):
         self.y += self.speed
 
-    def update(self, score_text):
+    def update(self):
         self.rect = pygame.Rect(self.x, self.y, self.width // 5, self.height // 5)
-
+        
         if self.y > self.screen_height:
           self.reset()
+          # score_text.update(score_text.score + 1)
 
     def reset(self):
       self.x = random.randint(0, self.screen_width - 50)
       self.y = - self.height
-
+            
 
     def detect_collision(self, other_rect):
         return self.rect.colliderect(other_rect)

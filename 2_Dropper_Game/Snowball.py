@@ -9,7 +9,7 @@ class Snowball:
         self.screen_height = screen_height
         self.x = random.randint(0, screen_width - 50)
         self.y = - self.height
-        self.speed = random.randint(6, 9)
+        self.speed = random.randint(10, 15)
         self.image = pygame.image.load('assets/snowball.png')
         self.resized_image = pygame.transform.scale(self.image, (self.width // 5, self.height // 5))
         self.rect = pygame.Rect(self.x, self.y, self.width // 5, self.height // 5)
@@ -25,7 +25,7 @@ class Snowball:
 
     def update(self):
         self.rect = pygame.Rect(self.x, self.y, self.width // 5, self.height // 5)
-        
+
         if self.y > self.screen_height:
           self.reset()
           # score_text.update(score_text.score + 1)
@@ -33,7 +33,7 @@ class Snowball:
     def reset(self):
       self.x = random.randint(0, self.screen_width - 50)
       self.y = - self.height
-            
+
 
     def detect_collision(self, other_rect):
         return self.rect.colliderect(other_rect)

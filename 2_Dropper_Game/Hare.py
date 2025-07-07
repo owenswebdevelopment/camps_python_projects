@@ -62,7 +62,7 @@ class Hare:
 
   def update(self):
     self.rect = pygame.Rect(self.x, self.y, (self.width - 20), (self.height - 15))
-        
+
 
   def detect_collision(self, other_rect):
     return self.rect.colliderect(other_rect)
