@@ -1,7 +1,7 @@
 import pygame
 
 class Button:
-    def __init__(self, text, x, y, width, height, position, font_size=36):
+    def __init__(self, text, x, y, width, height, font_size=36):
         self.text = text
         self.rect = pygame.Rect(x, y, width, height)
         self.font_size = font_size

@@ -25,8 +25,8 @@ class Rocket:
 		self.last_swap_time = pygame.time.get_ticks()
 		self.current_image_index = 0
 		self.moving_images = [
-			self.resized_image_1, 
-			self.resized_image_2, 
+			self.resized_image_1,
+			self.resized_image_2,
 			self.resized_image_3,
 			self.resized_image_4,
 		]
@@ -58,7 +58,10 @@ class Rocket:
 			self.y += dy * self.speed
 
 		self.rect = pygame.Rect(self.x, self.y, self.width // 2, self.height // 2)
-		
+
 	def detect_collision(self, other_rect):
 		return self.rect.colliderect(other_rect)
- 
+
+def reset(self):
+    self.x = 960  # assuming screen_width is 960
+    self.y = (720 // 2) - 75  # adjust based on your rocket's height
