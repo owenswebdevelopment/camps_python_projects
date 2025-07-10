@@ -15,6 +15,8 @@ from Sound import Sound
 from Snowball import Snowball
 from Lives import Lives
 from Message import Message
+from Button import Button
+
 
 # Sounds
 coin = Sound("sounds/coin.wav")
@@ -32,6 +34,9 @@ start_time = pygame.time.get_ticks()
 score_text = Text(1000, (255, 150, 203), (300, 25))
 lives_section = Lives(screen_width)
 message = Message('assets/gameover.png', 30, (screen_height / 2) - 100, 100, 100)
+# restart_button = Button("Restart", screen_width // 2 - 75, screen_height // 2 + 50, 150, 50)
+restart_button = Button("Restart", screen_width // 2 - 75, screen_height // 2 + 50, 150, 50)
+
 game_over = False
 
 # Pygame init
@@ -49,8 +54,8 @@ hare = Hare(hare_x, hare_y)
 carrots = [
   Carrot(0, screen_width, screen_height),
   Carrot(0, screen_width, screen_height),
-  Carrot(0, screen_width, screen_height),
-  Carrot(0, screen_width, screen_height)
+  Carrot(1500, screen_width, screen_height),
+  Carrot(2000, screen_width, screen_height)
 ]
 
 # Snowballs
@@ -58,15 +63,7 @@ snowballs = [
   Snowball(0, screen_width, screen_height),
   Snowball(500, screen_width, screen_height),
   Snowball(1000, screen_width, screen_height),
-  Snowball(1500, screen_width, screen_height),
-  Snowball(2000, screen_width, screen_height),
-  Snowball(2500, screen_width, screen_height),
-  Snowball(0, screen_width, screen_height),
-  Snowball(500, screen_width, screen_height),
-  Snowball(1000, screen_width, screen_height),
-  Snowball(1500, screen_width, screen_height),
-  Snowball(2000, screen_width, screen_height),
-  Snowball(2500, screen_width, screen_height)
+  Snowball(1500, screen_width, screen_height)
 ]
 
 # Game loop
@@ -76,6 +73,18 @@ while running:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
+
+    elif event.type == pygame.MOUSEBUTTONDOWN and game_over:
+        if restart_button.is_clicked(event.pos):
+          score_text.update(0)
+          hare.x, hare.y = hare_x, hare_y
+          lives_section.reset()
+          for snowball in snowballs:
+            snowball.reset()
+          for carrot in carrots:
+            carrot.reset()
+          game_over = False
+
 
   keys = pygame.key.get_pressed()
   if keys[pygame.K_ESCAPE]:
@@ -137,6 +146,7 @@ while running:
           game_over = True
   else:
     message.draw(screen)
+    restart_button.draw(screen)
 
   pygame.display.flip()
   clock.tick(60)

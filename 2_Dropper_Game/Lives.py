@@ -5,6 +5,8 @@ class Lives:
         self.lives = 3
         self.x = screen_width - 180
         self.y = 20
+        self.original_x = self.x
+        self.original_y = self.y
         self.image_1 = pygame.image.load('assets/life_1.png')
         self.image_2 = pygame.image.load('assets/life_2.png')
         self.image_3 = pygame.image.load('assets/life_3.png')
@@ -20,9 +22,15 @@ class Lives:
         if self.lives == 3:
           self.actual_image = self.image_3
         elif self.lives == 2:
-          self.actual_image = self.image_2  
+          self.actual_image = self.image_2
         elif self.lives == 1:
-          self.actual_image = self.image_1 
-        
+          self.actual_image = self.image_1
+
     def detect_collision(self, other_rect):
         return self.rect.colliderect(other_rect)
+
+    def reset(self):
+       self.lives = 3
+       self.actual_image = self.image_3
+       self.x = self.original_x
+       self.y = self.original_y
