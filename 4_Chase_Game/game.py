@@ -14,6 +14,7 @@ from Sound import Sound
 from Text import Text
 from Rocket import Rocket
 from Message import Message
+from Button import Button
 
 # Sounds
 bite = Sound("sounds/bite.wav")
@@ -27,6 +28,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
 score_text = Text(50, (255, 255, 255), (25, 25))
 message = Message('assets/gameover.png', 50, (screen_height / 2) - 100, 100, 100)
+restart_button = Button("Restart", screen_width // 2 - 75, screen_height // 2 + 50, 150, 50)
 game_over = False
 
 # Pygame init
@@ -54,6 +56,14 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+    elif event.type == pygame.MOUSEBUTTONDOWN and game_over:
+    if restart_button.is_clicked(event, pos):
+        score_text = 0
+        bone.reset()
+        rocket.reset()
+        dog.x, dog.y = dog_x, dog_y
+        game_over = False
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_ESCAPE]:
@@ -92,10 +102,9 @@ while running:
 
     else:
         message.draw(screen)
+        restart_button.draw(screen)
 
     pygame.display.flip()
     clock.tick(60)
 
 pygame.quit()
-
-
